@@ -7,5 +7,7 @@ Now it works with Slack too.
 
 #### TODO:
 ~~* Make it Slack compatible~~
+
 ~~* Format the text properly for Slack~~
+
 * Find a way to reduce IF-statements 
