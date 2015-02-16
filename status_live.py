@@ -24,35 +24,35 @@ class xblStatus(object):
 			music = item.contents[1].find_all('span')[0].text
 		try:
 			item.contents[1].find_all('span', {'class': 'unavailable'})[0].text
-			music_plat = item.contents[1].find_all('p')[1].text
+			music_plat = item.contents[1].find_all('p')[1].text+', '+item.contents[1].find_all('p')[2].text
 		except:
 			pass
 			#Xbox Live Core Services
 		cores = item.contents[3].find_all('span')[0].text
 		try:
 			item.contents[3].find_all('span', {'class': 'unavailable'})[0].text
-			cores_plat = item.contents[3].find_all('p')[1].text
+			cores_plat = item.contents[1].find_all('p')[1].text+', '+item.contents[1].find_all('p')[2].text
 		except:
 			pass
 			# Purchase and Content Usage
-		content = item.contents[5].find_all('span')[0].text
+		content = item.contents[1].find_all('p')[1].text+', '+item.contents[1].find_all('p')[2].text
 		try:
 			item.contents[5].find_all('span', {'class': 'unavailable'})[0].text
-			content_plat = item.contents[5].find_all('p')[1].text
+			content_plat = item.contents[1].find_all('p')[1].text+', '+item.contents[1].find_all('p')[2].text
 		except:
 			pass
 			# Website
 		site = item.contents[7].find_all('span')[0].text
 		try:
 			item.contents[7].find_all('span', {'class': 'unavailable'})[0].text
-			site_plat = item.contents[7].find_all('p')[1].text
+			site_plat = item.contents[1].find_all('p')[1].text+', '+item.contents[1].find_all('p')[2].text
 		except:
 			pass
 			# Social and Gaming
 		social = item.contents[9].find_all('span')[0].text
 		try:
 			item.contents[9].find_all('span', {'class': 'unavailable'})[0].text
-			social_plat = item.contents[9].find_all('p')[1].text
+			social_plat = item.contents[1].find_all('p')[1].text+', '+item.contents[1].find_all('p')[2].text
 		except:
 			pass
 
@@ -132,6 +132,7 @@ class xblStatus(object):
 		if music_plat != None and cores_plat == None and content_plat != None and site_plat != None and social_plat == None:
 			return json.dumps({'text': 'TV, Music and Video is %s, Platform: %s\nXbox Live Core Services is %s\nPurchase and Content Usage is %s, Platform: %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s' % (music, music_plat, cores, content, content_plat, site, site_plat, social)})
 
+		# Music, Website & S&G down, others ok
 		if music_plat != None and cores_plat == None and content_plat == None and site_plat != None and social_plat != None:
 			return json.dumps({'text': 'TV, Music and Video is %s, Platform: %s\nXbox Live Core Services is %s\nPurchase and Content Usage is %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s, Platform: %s' % (music, music_plat, cores, content, site, site_plat, social, social_plat)})
 
@@ -143,7 +144,7 @@ class xblStatus(object):
 		if music_plat == None and cores_plat != None and content_plat == None and site_plat != None and social_plat != None:
 			return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s, Platform: %s' % (music, cores, cores_plat, content, site, site_plat, social, social_plat)})
 
-		# P&G, Webiste and S&G down, others ok
+		# P&G, Website and S&G down, others ok
 		if music_plat == None and cores_plat == None and content_plat != None and site_plat != None and social_plat != None:
 			return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s\nPurchase and Content Usage is %s, Platform: %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s, Platform: %s' % (music, cores, content, content_plat, site, site_plat, social, social_plat)})
 
