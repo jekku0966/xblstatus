@@ -11,8 +11,8 @@ Now it works with Slack too.
 ![Screenshot](/static/xblstatus.png?raw=true "Screenshot")
 
 #### TODO:
-* ~~Make it Slack compatible~~
+* ~~Make it Slack compatible~~ **Done**
 
-* ~~Format the text properly for Slack~~
+* ~~Format the text properly for Slack~~ **Done**
 
-* Find a way to reduce IF-statements 
+* ~~Find a way to reduce IF-statements~~ Only **2** IFs. Multiple try-except phases...
