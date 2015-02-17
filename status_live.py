@@ -18,7 +18,7 @@ class xblStatus(object):
 		plat = {}
 
 		for item in g_data:
-			status['tmv']= item.contents[1].find_all('span')[0].text
+			status['tmv'] = item.contents[1].find_all('span')[0].text
 			try:
 				plat['tmv'] = item.contents[3].find_all('p')[1].text+', '+item.contents[3].find_all('p')[2].text
 			except:
@@ -79,7 +79,7 @@ class xblStatus(object):
 			except:
 				pass
 			try:
-				return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s\nPurchase and Content Usage is %s, Platform: &s\nWebsite is %s\nSocial and Gaming is %s' % (status['tmv'], status['cores'], status['pc'], plat['pc'], status['site'], status['sg'])})
+				return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s\nPurchase and Content Usage is %s, Platform: %s\nWebsite is %s\nSocial and Gaming is %s' % (status['tmv'], status['cores'], status['pc'], plat['pc'], status['site'], status['sg'])})
 			except:
 				pass
 			try:
@@ -111,7 +111,7 @@ class xblStatus(object):
 			except:
 				pass
 			try:
-				return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s' % (status['tmv'], status['cores'], status['pc'], status['site'], plat['site'], status['sg'])})
+				return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s' % (status['tmv'], status['cores'], plat['cores'], status['pc'], status['site'], plat['site'], status['sg'])})
 			except:
 				pass
 			try:
@@ -131,7 +131,7 @@ class xblStatus(object):
 			except:
 				pass
 			try:
-				return json.dumps({'text': 'TV, Music and Video is %s, Platform: %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s, Platform: %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s' % (status['tmv'], plat['tmv'], status['cores'], plat['cores'], status['pc'], plat['pc'], status['site'], status['sg'])})
+				return json.dumps({'text': 'TV, Music and Video is %s, Platform: %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s, Platform: %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s' % (status['tmv'], plat['tmv'], status['cores'], plat['cores'], status['pc'], plat['pc'], status['site'], plat['site'], status['sg'])})
 			except:
 				pass
 			try:
@@ -139,7 +139,7 @@ class xblStatus(object):
 			except:
 				pass
 			try:
-				return json.dumps({'text': 'TV, Music and Video is %s, Platform: %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s, Platform: %s' % (status['tmv'], plat['tmv'], status['cores'], plat['cores'], status['pc'], status['site'], status['sg'], plat['sg'])})
+				return json.dumps({'text': 'TV, Music and Video is %s, Platform: %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s, Platform: %s' % (status['tmv'], plat['tmv'], status['cores'], plat['cores'], status['pc'], status['site'], plat['site'], status['sg'], plat['sg'])})
 			except:
 				pass
 			try:
@@ -147,7 +147,7 @@ class xblStatus(object):
 			except:
 				pass
 			try:
-				return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s, Platform: %s\nWebsite is %s\nSocial and Gaming is %s, Platform: %s' % (status['tmv'], status['cores'], plat['cores'], status['pc'], status['site'], status['sg'], plat['sg'])})
+				return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s, Platform: %s\nWebsite is %s\nSocial and Gaming is %s, Platform: %s' % (status['tmv'], status['cores'], plat['cores'], status['pc'], plat['pc'], status['site'], status['sg'], plat['sg'])})
 			except:
 				pass
 			try:
