@@ -17,6 +17,7 @@ class xblStatus(object):
 		plat = {}
 
 		for item in g_data:
+			# TV, Music and Video
 			status['tmv'] = item.contents[1].find_all('span')[0].text
 			try:
 				plat['tmv'] = item.contents[1].find_all('p')[1].text+', '+item.contents[1].find_all('p')[2].text
@@ -27,7 +28,7 @@ class xblStatus(object):
 					plat['tmv'] = item.contents[1].find_all('p')[1].text
 				except:
 					pass
-
+			# Xbox Live Core Services
 			status['cores'] = item.contents[3].find_all('span')[0].text
 			try:
 				plat['cores'] = item.contents[3].find_all('p')[1].text+', '+item.contents[3].find_all('p')[2].text
@@ -38,7 +39,7 @@ class xblStatus(object):
 					plat['cores'] = item.contents[3].find_all('p')[1].text
 				except:
 					pass
-
+			#Purchase and Content Usage
 			status['pc'] = item.contents[5].find_all('span')[0].text
 			try:
 				plat['pc'] = item.contents[5].find_all('p')[1].text+', '+item.contents[5].find_all('p')[2].text
@@ -49,7 +50,7 @@ class xblStatus(object):
 					plat['pc'] = item.contents[5].find_all('p')[1].text
 				except:
 					pass
-
+			# Website
 			status['site'] = item.contents[7].find_all('span')[0].text
 			try:
 				plat['site'] = item.contents[7].find_all('p')[1].text+', '+item.contents[7].find_all('p')[2].text
@@ -60,7 +61,7 @@ class xblStatus(object):
 					plat['site'] = item.contents[7].find_all('p')[1].text
 				except:
 					pass
-
+			# Social and Gaming
 			status['sg'] = item.contents[9].find_all('span')[0].text
 			try:
 				plat['sg'] = item.contents[9].find_all('p')[1].text+', '+item.contents[9].find_all('p')[2].text
