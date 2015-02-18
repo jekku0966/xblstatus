@@ -14,179 +14,23 @@ class xblStatus(object):
 		soup = BeautifulSoup(r.content)
 		g_data = soup.find_all("ul", {"class": "core"})
 		status = {}
-		plat = {}
 
 		for item in g_data:
-			# TV, Music and Video
-			status['tmv'] = item.contents[1].find_all('span')[0].text
-			try:
-				plat['tmv'] = item.contents[1].find_all('p')[1].text+', '+item.contents[1].find_all('p')[2].text
-			except:
-				pass
-			if bool(plat) == False:
-				try:
-					plat['tmv'] = item.contents[1].find_all('p')[1].text
-				except:
-					pass
-			# Xbox Live Core Services
-			status['cores'] = item.contents[3].find_all('span')[0].text
-			try:
-				plat['cores'] = item.contents[3].find_all('p')[1].text+', '+item.contents[3].find_all('p')[2].text
-			except:
-				pass
-			if bool(plat) == False:
-				try:
-					plat['cores'] = item.contents[3].find_all('p')[1].text
-				except:
-					pass
-			#Purchase and Content Usage
-			status['pc'] = item.contents[5].find_all('span')[0].text
-			try:
-				plat['pc'] = item.contents[5].find_all('p')[1].text+', '+item.contents[5].find_all('p')[2].text
-			except:
-				pass
-			if bool(plat) == False:
-				try:
-					plat['pc'] = item.contents[5].find_all('p')[1].text
-				except:
-					pass
-			# Website
-			status['site'] = item.contents[7].find_all('span')[0].text
-			try:
-				plat['site'] = item.contents[7].find_all('p')[1].text+', '+item.contents[7].find_all('p')[2].text
-			except:
-				pass
-			if bool(plat) == False:
-				try:
-					plat['site'] = item.contents[7].find_all('p')[1].text
-				except:
-					pass
-			# Social and Gaming
-			status['sg'] = item.contents[9].find_all('span')[0].text
-			try:
-				plat['sg'] = item.contents[9].find_all('p')[1].text+', '+item.contents[9].find_all('p')[2].text
-			except:
-				pass
-			if bool(plat) == False:
-				try:
-					plat['sg'] = item.contents[9].find_all('p')[1].text
-				except:
-					pass
+			for service in item.find_all('li'):
+				service = service.h3.text[:-14]
+				status[service] = []
+				for platform in item.find_all('ul', {'class': 'platform'}):
+					status[service].append(platform.find('p').text)
 
-		# All ok
-		if bool(plat) == False:
-			 return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s\nPurchase and Content Usage is %s\nWebsite is %s\nSocial and Gaming is %s' % (status['tmv'], status['cores'], status['pc'], status['site'], status['sg'])})
+		output = []
+		for service, platforms in status.items():
+			if platforms:
+				line = '{} is limited. Platforms {}'
+			else:
+				line = '{} is up and running'
+			output.append(line.format(service, ', '.join(platforms)))
 
-		# Something is down
-		if bool(plat) == True:
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s, Platform: %s\nXbox Live Core Services is %s\nPurchase and Content Usage is %s\nWebsite is %s\nSocial and Gaming is %s' % (status['tmv'], plat['tmv'], status['cores'], status['pc'], status['site'], status['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s\nWebsite is %s\nSocial and Gaming is %s' % (status['tmv'], status['cores'], plat['cores'], status['pc'], status['site'], status['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s\nPurchase and Content Usage is %s, Platform: %s\nWebsite is %s\nSocial and Gaming is %s' % (status['tmv'], status['cores'], status['pc'], plat['pc'], status['site'], status['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s\nPurchase and Content Usage is %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s' % (status['tmv'], status['cores'], status['pc'], status['site'], plat['site'], status['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s\nPurchase and Content Usage is %s\nWebsite is %s\nSocial and Gaming is %s, Platform: %s' % (status['tmv'], status['cores'], status['pc'], status['site'], status['sg'], plat['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s, Platform: %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s\nWebsite is %s\nSocial and Gaming is %s' % (status['tmv'], plat['tmv'], status['cores'], plat['cores'], status['pc'], status['site'], status['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s, Platform: %s\nXbox Live Core Services is %s\nPurchase and Content Usage is %s, Platform: %s\nWebsite is %s\nSocial and Gaming is %s' % (status['tmv'], plat['tms'], status['cores'], status['pc'], plat['pc'], status['site'], status['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s, Platform: %s\nXbox Live Core Services is %s\nPurchase and Content Usage is %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s' % (status['tmv'], plat['tmv'], status['cores'], status['pc'], status['site'], plat['site'], status['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s, Platform: %s\nXbox Live Core Services is %s\nPurchase and Content Usage is %s\nWebsite is %s\nSocial and Gaming is %s, Platform: %s' % (status['tmv'], plat['tmv'], status['cores'], status['pc'], status['site'], status['sg'], plat['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s, Platform: %s\nWebsite is %s\nSocial and Gaming is %s' % (status['tmv'], status['cores'], plat['cores'], status['pc'], plat['pc'], status['site'], status['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s' % (status['tmv'], status['cores'], plat['cores'], status['pc'], status['site'], plat['site'], status['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s, Platform %s\nPurchase and Content Usage is %s\nWebsite is %s\nSocial and Gaming is %s, Platform: %s' % (status['tmv'], status['cores'], plat['cires'], status['pc'], status['site'], status['sg'], plat['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s\nPurchase and Content Usage is %s, Platform: %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s' % (status['tmv'], status['cores'], status['pc'], plat['pc'], status['site'], plat['site'], status['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s\nPurchase and Content Usage is %s, Platform: %s\nWebsite is %s\nSocial and Gaming is %s, Platform: %s' % (status['tmv'], status['cores'], status['pc'], plat['pc'], status['site'], status['sg'], plat['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s\nPurchase and Content Usage is %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s, Platform: %s' % (status['tmv'], status['cores'], status['pc'], status['site'], plat['site'], status['sg'], plat['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s, Platform: %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s, Platform: %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s' % (status['tmv'], plat['tmv'], status['cores'], plat['cores'], status['pc'], plat['pc'], status['site'], plat['site'], status['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s, Platform: %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s' % (status['tmv'], plat['tmv'], status['cores'], status['cores'], status['pc'], status['site'], plat['site'], status['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s, Platform: %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s, Platform: %s' % (status['tmv'], plat['tmv'], status['cores'], plat['cores'], status['pc'], status['site'], plat['site'], status['sg'], plat['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s, Platform: %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s' % (status['tmv'], status['cores'], plat['cores'], status['pc'], plat['pc'], status['site'], plat['site'], status['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s, Platform: %s\nWebsite is %s\nSocial and Gaming is %s, Platform: %s' % (status['tmv'], status['cores'], plat['cores'], status['pc'], plat['pc'], status['site'], status['sg'], plat['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s\nPurchase and Content Usage is %s, Platform: %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s, Platform: %s' % (status['tmv'], status['cores'], status['pc'], plat['pc'], status['site'], plat['site'], status['sg'], plat['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s, Platform: %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s, Platform: %s' % (status['tmv'], status['cores'], plat['cores'], status['pc'], plat['pc'], status['site'], plat['site'], status['sg'], plat['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s, Platform: %s\nXbox Live Core Services is %s\nPurchase and Content Usage is %s, Platform: %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s, Platform: %s' % (status['tmv'], plat['tmv'], status['cores'], status['pc'], plat['pc'], status['site'], plat['site'], status['sg'], plat['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s, Platform: %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s, Platform: %s' % (status['tmv'], plat['tmv'], status['cores'], plat['cores'], status['pc'], status['site'], plat['site'], status['sg'], plat['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s, Platform: %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s, Platform: %s\nWebsite is %s\nSocial and Gaming is %s, Platform: %s' % (status['tmv'], plat['tmv'], status['cores'], plat['cores'], status['pc'], plat['pc'], status['site'], status['sg'], plat['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s, Platform: %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s, Platform: %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s' % (status['tmv'], plat['tmv'], status['cores'], plat['cores'], status['pc'], plat['pc'], status['site'], plat['site'], status['sg'])})
-			except:
-				pass
-			try:
-				return json.dumps({'text': 'TV, Music and Video is %s, Platform: %s\nXbox Live Core Services is %s, Platform: %s\nPurchase and Content Usage is %s, Platform: %s\nWebsite is %s, Platform: %s\nSocial and Gaming is %s, Platform: %s' % (status['tmv'], plat['tmv'], status['cores'], plat['cores'], status['pc'], plat['pc'], status['site'], plat['site'], status['sg'], plat['sg'])})
-			except:
-				pass
+		return json.dumps({'text': '\n'.join(output)})
 
 # Start the Cherrypy server        
 if __name__ == '__main__':
