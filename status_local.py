@@ -11,7 +11,7 @@ for item in g_data:
 	try:
 		if item.contents[1].find_all('span', {'class': 'unavailable'})[0].text == 'Limited':
 			try:
-				a = a + '. ' + 'Platforms: ' + item.contents[1].find_all('p')[1:2].text
+				a = a + '. ' + 'Platforms: ' + item.contents[1].find_all('p')[1].text + ', ' + item.contents[1].find_all('p')[2].text
 				print a
 			except:
 				a = a + '. ' +  'Platforms: ' + item.contents[1].find_all('p')[1].text
@@ -24,7 +24,7 @@ for item in g_data:
 	try:
 		if item.contents[3].find_all('span', {'class': 'unavailable'})[0].text == 'Limited':
 			try:
-				b = b + '. ' +  'Platforms: ' + item.contents[3].find_all('p')[1:2].text
+				b = b + '. ' +  'Platforms: ' + item.contents[3].find_all('p')[1].text + ', ' + item.contents[3].find_all('p')[2].text
 				print b
 			except:
 				b = b + '. ' +  'Platforms: ' + item.contents[3].find_all('p')[1].text
@@ -38,7 +38,7 @@ for item in g_data:
 	try:
 		if item.contents[5].find_all('span', {'class': 'unavailable'})[0].text == 'Limited':
 			try:
-				c = c + '. ' +  'Platforms: ' + item.contents[5].find_all('p')[1:2].text
+				c = c + '. ' +  'Platforms: ' + item.contents[5].find_all('p')[1].text + ', ' + item.contents[5].find_all('p')[2].text
 				print c
 			except:
 				c = c + '. ' +  'Platforms: ' + item.contents[5].find_all('p')[1].text
@@ -51,7 +51,7 @@ for item in g_data:
 	try:
 		if item.contents[7].find_all('span', {'class': 'unavailable'})[0].text == 'Limited':
 			try:
-				d = d + '. ' +  'Platforms: ' + item.contents[7].find_all('p')[1:2].text
+				d = d + '. ' +  'Platforms: ' + item.contents[7].find_all('p')[1].text + ', ' + item.contents[7].find_all('p')[2].text
 				print d
 			except:
 				d = d + '. ' +  'Platforms: ' + item.contents[7].find_all('p')[1].text
@@ -65,7 +65,7 @@ for item in g_data:
 	try:
 		if item.contents[9].find_all('span', {'class': 'unavailable'})[0].text == 'Limited':
 			try:
-				e = e + '. ' +  'Platforms: ' + item.contents[9].find_all('p')[1:2].text
+				e = e + '. ' +  'Platforms: ' + item.contents[9].find_all('p')[1].text + ', ' + item.contents[9].find_all('p')[2].text
 				print e
 			except:
 				e = e + '. ' +  'Platforms: ' + item.contents[9].find_all('p')[1].text
