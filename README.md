@@ -10,6 +10,8 @@ I believe I've covered all possibility of 'limited' and 'up and running'. If you
 
 Now it works with Slack too.
 
+If you want to use this in your Slack, create an outgoing webhook and use address http://xblstatus.herokuapp.com
+
 ![Screenshot](/static/xblstatus.png?raw=true "Screenshot")
 
 #### TODO:

@@ -16,21 +16,64 @@ class xblStatus(object):
 		status = {}
 
 		for item in g_data:
-			for service in item.find_all('li'):
-				service = service.h3.text[:-14]
-				status[service] = []
-				for platform in item.find_all('ul', {'class': 'platform'}):
-					status[service].append(platform.find('p').text)
+			a = item.contents[1].find_all('h3')[0].text.split(item.contents[1].find_all('span')[0].text)[0] +' is ' + item.contents[1].find_all('span')[0].text
+			try:
+				if item.contents[1].find_all('span', {'class': 'unavailable'})[0].text == 'Limited':
+					try:
+						a = a + '. ' + 'Platforms: ' + item.contents[1].find_all('p')[1:2].text
+					except:
+						a = a + '. ' +  'Platforms: ' + item.contents[1].find_all('p')[1].text
+			except:
+				pass
+				a = a
 
-		output = []
-		for service, platforms in status.items():
-			if platforms:
-				line = '{} is limited. Platforms {}'
-			else:
-				line = '{} is up and running'
-			output.append(line.format(service, ', '.join(platforms)))
 
-		return json.dumps({'text': '\n'.join(output)})
+			b = '\n'+item.contents[3].find_all('h3')[0].text.split(item.contents[3].find_all('span')[0].text)[0] +' is ' + item.contents[3].find_all('span')[0].text
+			try:
+				if item.contents[3].find_all('span', {'class': 'unavailable'})[0].text == 'Limited':
+					try:
+						b = b + '. ' +  'Platforms: ' + item.contents[3].find_all('p')[1:2].text
+					except:
+						b = b + '. ' +  'Platforms: ' + item.contents[3].find_all('p')[1].text
+			except:
+				pass
+				b = b
+
+			c = '\n'+item.contents[5].find_all('h3')[0].text.split(item.contents[5].find_all('span')[0].text)[0] +' is ' + item.contents[5].find_all('span')[0].text
+			try:
+				if item.contents[5].find_all('span', {'class': 'unavailable'})[0].text == 'Limited':
+					try:
+						c = c + '. ' +  'Platforms: ' + item.contents[5].find_all('p')[1:2].text
+					except:
+						c = c + '. ' +  'Platforms: ' + item.contents[5].find_all('p')[1].text
+			except:
+				pass
+				sc = c
+
+			d = '\n'+item.contents[7].find_all('h3')[0].text.split(item.contents[7].find_all('span')[0].text)[0] +' is ' + item.contents[7].find_all('span')[0].text
+			try:
+				if item.contents[7].find_all('span', {'class': 'unavailable'})[0].text == 'Limited':
+					try:
+						d = d + '. ' +  'Platforms: ' + item.contents[7].find_all('p')[1:2].text
+					except:
+						d = d + '. ' +  'Platforms: ' + item.contents[7].find_all('p')[1].text
+			except:
+				pass
+				d = d
+
+			e = '\n'+item.contents[9].find_all('h3')[0].text.split(item.contents[9].find_all('span')[0].text)[0] +' is ' + item.contents[9].find_all('span')[0].text
+			try:
+				if item.contents[9].find_all('span', {'class': 'unavailable'})[0].text == 'Limited':
+					try:
+						e = e + '. ' +  'Platforms: ' + item.contents[9].find_all('p')[1:2].text
+					except:
+						e = e + '. ' +  'Platforms: ' + item.contents[9].find_all('p')[1].text
+						pass
+			except:
+				pass
+				e = e
+
+			return json.dumps({'text': '%s%s%s%s%s' % (a,b,c,d,e)})
 
 # Start the Cherrypy server        
 if __name__ == '__main__':
