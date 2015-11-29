@@ -9,7 +9,7 @@ g_data = soup.findAll('ul', {'class': 'core'})
 
 for item in g_data:
 	
-	a = item.contents[1].find_all('h3')[0].text.split(item.contents[1].find_all('span')[0].text)[0] +' is ' + item.contents[1].find_all('span')[0].text
+	a = item.contents[1].find_all('h3')[1].text +' is ' + item.contents[1].find_all('span')[0].text
 	try:
 		if item.contents[1].find_all('span', {'class': 'unavailable'})[0].text == 'Limited':
 			if item.contents[1].find_all('p')[1].text == 'Xbox One' and item.contents[1].find_all('p')[2].text == 'Xbox 360':
@@ -24,7 +24,7 @@ for item in g_data:
 
 	
 
-	b = item.contents[3].find_all('h3')[0].text.split(item.contents[3].find_all('span')[0].text)[0] +' is ' + item.contents[3].find_all('span')[0].text
+	b = item.contents[3].find_all('h3')[1].text +' is ' + item.contents[3].find_all('span')[0].text
 	try:
 		if item.contents[3].find_all('span', {'class': 'unavailable'})[0].text == 'Limited':
 			if item.contents[3].find_all('p')[1].text == 'Xbox One' and item.contents[3].find_all('p')[2].text == 'Xbox 360':
@@ -37,7 +37,7 @@ for item in g_data:
 		pass
 	print b
 
-	c = item.contents[5].find_all('h3')[0].text.split(item.contents[5].find_all('span')[0].text)[0] +' is ' + item.contents[5].find_all('span')[0].text
+	c = item.contents[5].find_all('h3')[1].text +' is ' + item.contents[5].find_all('span')[0].text
 	try:
 		if item.contents[5].find_all('span', {'class': 'unavailable'})[0].text == 'Limited':
 			if item.contents[5].find_all('p')[1].text == 'Xbox One' and item.contents[5].find_all('p')[2].text == 'Xbox 360':
@@ -50,7 +50,7 @@ for item in g_data:
 		pass
 	print c
 
-	d = item.contents[7].find_all('h3')[0].text.split(item.contents[7].find_all('span')[0].text)[0] +' is ' + item.contents[7].find_all('span')[0].text
+	d = item.contents[7].find_all('h3')[1].text +' is ' + item.contents[7].find_all('span')[0].text
 	try:
 		if item.contents[7].find_all('span', {'class': 'unavailable'})[0].text == 'Limited':
 			if item.contents[7].find_all('p')[1].text == 'Xbox One' and item.contents[7].find_all('p')[2].text == 'Xbox 360':
@@ -63,7 +63,7 @@ for item in g_data:
 		pass
 	print d
 
-	e = item.contents[9].find_all('h3')[0].text.split(item.contents[9].find_all('span')[0].text)[0] +' is ' + item.contents[9].find_all('span')[0].text
+	e = item.contents[9].find_all('h3')[1].text +' is ' + item.contents[9].find_all('span')[0].text
 	try:
 		if item.contents[9].find_all('span', {'class': 'unavailable'})[0].text == 'Limited':
 			if item.contents[9].find_all('p')[1].text == 'Xbox One' and item.contents[9].find_all('p')[2].text == 'Xbox 360':
