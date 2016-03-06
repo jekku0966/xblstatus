@@ -12,6 +12,8 @@ Now it works with Slack too.
 
 If you want to use this in you Slack community create an outgoing webhook with the keyword '!xbl' and use http://xblstatus.herokuapp.com as the url.
 
+After a complete code overhault and a makeover here's how it looks now:
+
 ![Screenshot](/static/xblstatus1.png?raw=true "Screenshot")
 
 #### TODO:
@@ -19,4 +21,4 @@ If you want to use this in you Slack community create an outgoing webhook with t
 
 * ~~Format the text properly for Slack~~ **Done**
 
-* ~~Find a way to reduce IF-statements~~ ~~Only **2** IFs.~~ Multiple try-except phases...
+* ~~Find a way to reduce IF-statements~~ ~~Only **2** IFs. Multiple try-except phases...~~
