@@ -12,7 +12,7 @@ Now it works with Slack too.
 
 If you want to use this in you Slack community create an outgoing webhook with the keyword '!xbl' and use http://xblstatus.herokuapp.com as the url.
 
-![Screenshot](/static/xblstatus.png?raw=true "Screenshot")
+![Screenshot](/static/xblstatus1.png?raw=true "Screenshot")
 
 #### TODO:
 * ~~Make it Slack compatible~~ **Done**

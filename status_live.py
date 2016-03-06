@@ -11,67 +11,30 @@ class xblStatus(object):
 
 	def POST(*args, **kwargs):
 		r = requests.get('http://support.xbox.com/en-US/xbox-live-status?icid=furl_status')
-		soup = BeautifulSoup(r.content)
+		soup = BeautifulSoup(r.content, 'html5lib')
 		g_data = soup.find_all("ul", {"class": "core"})
 		status = {}
 
 		for item in g_data:
-			a = item.contents[1].find_all('h3')[1].text +' is ' + item.contents[1].find_all('span')[0].text
-			try:
-				if item.contents[1].find_all('span', {'class': 'unavailable'})[0].text == 'Limited':
-					if item.contents[1].find_all('p')[1].text == 'Xbox One' and item.contents[1].find_all('p')[2].text == 'Xbox 360':
-						a = a + '. ' + 'Platforms: ' + item.contents[1].find_all('p')[1].text + ', ' + item.contents[1].find_all('p')[2].text
-					else:
-						a = a + '. ' +  'Platforms: ' + item.contents[1].find_all('p')[1].text
-			except:
-				pass
-			print a
+			for service in item.findAll('h3', {'class': 'servicename'}):
+				status[service.text] = []
+			for platform in item.findAll('div', {'class': 'label'}):
+				status[service.text].append(platform.text)
+		outputOk = []
+		outputDown = []
+		for service,platform in status.items():
+			if platform:
+				platString = ''.join(platform)
+				outputDown.append('{} is limited. Platforms: {}\n'.format(service, platString))
+			else:
+				outputOk.append('{} is up and running.\n'.format(service))
+			strOk = ''.join(outputOk)
+			strDown = ''.join(outputDown)
+		if outputOk:
+			return json.dumps({'attachments': [{'fallback': strOk, 'title': 'These systems are online:', 'text': strOk, 'color': '#008000'}]})
+		if outoutDown:
+			return json.dumps({'attachments': [{'fallback': strDown, 'title': 'These systems are down:', 'text': strDown, 'color': '#FF0000'}]})
 
-			b = '\n'+item.contents[3].find_all('h3')[1].text +' is ' + item.contents[3].find_all('span')[0].text
-			try:
-				if item.contents[3].find_all('span', {'class': 'unavailable'})[0].text == 'Limited':
-					if item.contents[3].find_all('p')[1].text == 'Xbox One' and item.contents[3].find_all('p')[2].text == 'Xbox 360':
-						b = b + '. ' + 'Platforms: ' + item.contents[3].find_all('p')[1].text + ', ' + item.contents[3].find_all('p')[2].text
-					else:
-						b = b + '. ' +  'Platforms: ' + item.contents[3].find_all('p')[1].text
-			except:
-				pass
-			print b
-
-			c = '\n'+item.contents[5].find_all('h3')[1].text +' is ' + item.contents[5].find_all('span')[0].text
-			try:
-				if item.contents[5].find_all('span', {'class': 'unavailable'})[0].text == 'Limited':
-					if item.contents[5].find_all('p')[1].text == 'Xbox One' and item.contents[5].find_all('p')[2].text == 'Xbox 360':
-						c = c + '. ' + 'Platforms: ' + item.contents[5].find_all('p')[1].text + ', ' + item.contents[5].find_all('p')[2].text
-					else:
-						c = c + '. ' +  'Platforms: ' + item.contents[5].find_all('p')[1].text
-			except:
-				pass
-			print c
-
-			d = '\n'+item.contents[7].find_all('h3')[1].text +' is ' + item.contents[7].find_all('span')[0].text
-			try:
-				if item.contents[7].find_all('span', {'class': 'unavailable'})[0].text == 'Limited':
-					if item.contents[7].find_all('p')[1].text == 'Xbox One' and item.contents[7].find_all('p')[2].text == 'Xbox 360':
-						d = d + '. ' + 'Platforms: ' + item.contents[7].find_all('p')[1].text + ', ' + item.contents[7].find_all('p')[2].text
-					else:
-						d = d + '. ' +  'Platforms: ' + item.contents[7].find_all('p')[1].text
-			except:
-				pass
-			print d
-
-			e = '\n'+item.contents[9].find_all('h3')[1]. +' is ' + item.contents[9].find_all('span')[0].text
-			try:
-				if item.contents[9].find_all('span', {'class': 'unavailable'})[0].text == 'Limited':
-					if item.contents[9].find_all('p')[1].text == 'Xbox One' and item.contents[9].find_all('p')[2].text == 'Xbox 360':
-						e = e + '. ' + 'Platforms: ' + item.contents[9].find_all('p')[1].text + ', ' + item.contents[9].find_all('p')[2].text
-					else:
-						e = e + '. ' +  'Platforms: ' + item.contents[9].find_all('p')[1].text
-			except:
-				pass
-			print e
-
-			return json.dumps({'text': '%s%s%s%s%s' % (a,b,c,d,e)})
 
 # Start the Cherrypy server        
 if __name__ == '__main__':
