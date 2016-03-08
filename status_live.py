@@ -30,10 +30,12 @@ class xblStatus(object):
 				outputOk.append('{} is up and running.\n'.format(service))
 			strOk = ''.join(outputOk)
 			strDown = ''.join(outputDown)
-		if outputOk:
+		if strDown and strOk:
+			return json.dumps({'attachments': [{'fallback': strOk, 'title': 'These systems are online:', 'text': strOk, 'color': '#008000'}, {'fallback': strDown, 'title': 'These systems are down:', 'text': strDown, 'color': '#FF0000'}]})
+		elif strDown and not strOk:
+			return json.dumps({'attachments': [	{'fallback': strDown, 'title': 'These systems are down:', 'text': strDown, 'color': '#FF0000'}]})
+		else:
 			return json.dumps({'attachments': [{'fallback': strOk, 'title': 'These systems are online:', 'text': strOk, 'color': '#008000'}]})
-		if outputDown:
-			return json.dumps({'attachments': [{'fallback': strDown, 'title': 'These systems are down:', 'text': strDown, 'color': '#FF0000'}]})
 
 
 # Start the Cherrypy server        
