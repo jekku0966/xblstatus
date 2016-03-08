@@ -32,7 +32,7 @@ class xblStatus(object):
 			strDown = ''.join(outputDown)
 		if outputOk:
 			return json.dumps({'attachments': [{'fallback': strOk, 'title': 'These systems are online:', 'text': strOk, 'color': '#008000'}]})
-		if outoutDown:
+		if outputDown:
 			return json.dumps({'attachments': [{'fallback': strDown, 'title': 'These systems are down:', 'text': strDown, 'color': '#FF0000'}]})
 
 
