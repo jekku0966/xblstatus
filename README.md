@@ -1,3 +1,6 @@
+# Not supported anymore
+Use Mixer to Slack, which combines Twitch streams, Mixer streams and this bot.
+
 # xblstatus
 
 [![Codacy Badge](https://www.codacy.com/project/badge/785595d972354a8ea08f8149ce40a5c5)](https://www.codacy.com/public/niklasjerva/xblstatus_2)
